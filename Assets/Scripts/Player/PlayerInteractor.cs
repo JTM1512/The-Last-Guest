@@ -22,10 +22,7 @@ public class PlayerInteractor : MonoBehaviour
     {
         Current = Look();
 
-        // Check for interaction input
-        var keyboard = Keyboard.current;
-        if (keyboard != null && keyboard.eKey.wasPressedThisFrame && Current != null)
-            Debug.Log(Current.name);
+        
     }
 
     GameObject Look()

@@ -60,9 +60,9 @@ public static class MenuScreenSetup
         UnityEventTools.AddPersistentListener(play.onClick, screens.PlayGame);
         UnityEventTools.AddPersistentListener(quitMenu.onClick, screens.QuitGame);
 
-        var resume = CenterButton(screens.pauseMenu.transform, "Resume Game", font, buttonSprite, new Vector2(0f, 36f));
-        var restart = CenterButton(screens.pauseMenu.transform, "Restart", font, buttonSprite, new Vector2(0f, -28f));
-        var quitPause = CenterButton(screens.pauseMenu.transform, "Quit Game", font, buttonSprite, new Vector2(0f, -92f));
+        var resume = CenterButton(screens.pauseMenu.transform, "Resume Game", font, buttonSprite, new Vector2(0f, -150f));
+        var restart = CenterButton(screens.pauseMenu.transform, "Restart", font, buttonSprite, new Vector2(0f, -214f));
+        var quitPause = CenterButton(screens.pauseMenu.transform, "Quit Game", font, buttonSprite, new Vector2(0f, -278f));
         UnityEventTools.AddPersistentListener(resume.onClick, screens.Resume);
         UnityEventTools.AddPersistentListener(restart.onClick, screens.Restart);
         UnityEventTools.AddPersistentListener(quitPause.onClick, screens.QuitGame);

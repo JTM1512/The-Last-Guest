@@ -6,7 +6,9 @@ using UnityEngine.UI;
 public class Examine : MonoBehaviour
 {
     public Text readout;
+    public Text holdPrompt;
     public List<Clue> found = new List<Clue>();
+    public List<Suspect> interviewed = new List<Suspect>();
 
     PlayerInteractor eyes;
     ItemHold hands;
@@ -21,10 +23,16 @@ public class Examine : MonoBehaviour
         charge = GetComponent<Accusation>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // Check if the 'E' key was pressed this frame
+        if (holdPrompt != null)
+        {
+            if (hands != null && hands.IsHolding && (GameScreens.Instance == null || !GameScreens.Instance.BlocksPlay))
+                holdPrompt.text = "E analyse     Mouse turn     Right click put back";
+            else
+                holdPrompt.text = "";
+        }
+
         var keyboard = Keyboard.current;
         if (keyboard == null || !keyboard.eKey.wasPressedThisFrame || (journal != null && journal.IsOpen) || (charge != null && charge.IsOpen) || (GameScreens.Instance != null && GameScreens.Instance.BlocksPlay))
             return;
@@ -38,7 +46,6 @@ public class Examine : MonoBehaviour
             return;
         }
 
-        // Get the currently selected object from the PlayerInteractor
         var target = eyes.Current;
         if (target == null)
         {
@@ -46,15 +53,15 @@ public class Examine : MonoBehaviour
             return;
         }
 
-        // Check if the target has a Suspect component in its parent hierarchy
         var suspect = target.GetComponentInParent<Suspect>();
         if (suspect != null)
         {
+            if (!interviewed.Contains(suspect))
+                interviewed.Add(suspect);
             readout.text = suspect.suspectName + "\n" + suspect.claim;
             return;
         }
 
         readout.text = "";
-
     }
 }

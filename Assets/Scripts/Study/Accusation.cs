@@ -57,35 +57,70 @@ public class Accusation : MonoBehaviour
         chosenWho = null;
         chosenWhy = null;
         chosenProof = null;
-        verdict.text = "Choose who, why, and one clue.";
-        var people = FindObjectsByType<Suspect>(FindObjectsSortMode.None);
-        System.Array.Sort(people, (a, b) => string.Compare(a.suspectName, b.suspectName));
-        foreach (var person in people)
+        verdict.text = "Choose who, why, and one clue you have found.";
+
+        var people = examine != null ? examine.interviewed : null;
+        if (people != null)
         {
-            var who = person;
-            MakeButton(whoChoices, who.suspectName, button =>
+            var ordered = new System.Collections.Generic.List<Suspect>(people);
+            ordered.Sort((a, b) => string.Compare(a != null ? a.suspectName : "", b != null ? b.suspectName : ""));
+            foreach (var person in ordered)
             {
-                Choose(whoChoices, button);
-                chosenWho = who;
-            });
-            var why = person.motive;
-            MakeButton(whyChoices, why, button =>
-            {
-                Choose(whyChoices, button);
-                chosenWhy = why;
-            });
+                if (person == null)
+                    continue;
+                var who = person;
+                MakeButton(whoChoices, who.suspectName, button =>
+                {
+                    Choose(whoChoices, button);
+                    chosenWho = who;
+                });
+                var why = person.motive;
+                MakeButton(whyChoices, why, button =>
+                {
+                    Choose(whyChoices, button);
+                    chosenWhy = why;
+                });
+            }
         }
-        foreach (var clue in examine.found)
+
+        if (whoChoices.childCount == 0)
+            MakeNote(whoChoices, "Interview a suspect first");
+        if (whyChoices.childCount == 0)
+            MakeNote(whyChoices, "Interview a suspect first");
+
+        if (examine != null)
         {
-            if (clue == null)
-                continue;
-            var proofClue = clue;
-            MakeButton(evidenceChoices, proofClue.clueName, button =>
+            foreach (var clue in examine.found)
             {
-                Choose(evidenceChoices, button);
-                chosenProof = proofClue;
-            });
+                if (clue == null)
+                    continue;
+                var proofClue = clue;
+                MakeButton(evidenceChoices, proofClue.clueName, button =>
+                {
+                    Choose(evidenceChoices, button);
+                    chosenProof = proofClue;
+                });
+            }
         }
+
+        if (evidenceChoices.childCount == 0)
+            MakeNote(evidenceChoices, "Analyse a clue first");
+    }
+
+    void MakeNote(Transform parent, string label)
+    {
+        var item = new GameObject(label, typeof(RectTransform), typeof(Text), typeof(LayoutElement));
+        item.transform.SetParent(parent, false);
+        var layout = item.GetComponent<LayoutElement>();
+        layout.minHeight = 48f;
+        layout.preferredHeight = 48f;
+        var text = item.GetComponent<Text>();
+        text.font = verdict.font;
+        text.fontSize = 15;
+        text.alignment = TextAnchor.MiddleCenter;
+        text.color = new Color(0.94f, 0.88f, 0.75f, 0.65f);
+        text.text = label;
+        text.raycastTarget = false;
     }
     void Submit()
     {

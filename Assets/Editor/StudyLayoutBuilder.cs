@@ -16,7 +16,7 @@ public static class StudyLayoutBuilder
     const string StudyScene = "Assets/Scenes/Study.unity";
     const string MaterialFolder = "Assets/Materials/Study";
 
-    const string BottlePath = "Assets/BK_AlchemistHouse/Prefabs/Items/Bottles/Bottle01.prefab";
+    const string BottlePath = "Assets/Hash Game studios/Herbal & Medic Pack/Resources/Prefabs/Medic pack/Medical First Aid Bottle 1/Medical First Aid Bottle 1_collider.prefab";
     const string ReportPath = "Assets/BK_AlchemistHouse/Prefabs/Items/Books/Book06.prefab";
     const string NotePath = "Assets/BK_AlchemistHouse/Prefabs/Items/Books/Book14.prefab";
     const string LampPath = "Assets/BK_AlchemistHouse/Prefabs/Items/Lights/Oillamp01_on.prefab";

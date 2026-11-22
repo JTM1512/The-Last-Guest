@@ -10,11 +10,13 @@ public class Examine : MonoBehaviour
 
     PlayerInteractor eyes;
     ItemHold hands;
+    Journal journal;
 
     void Awake()
     {
         eyes = GetComponent<PlayerInteractor>();
         hands = GetComponent<ItemHold>();
+        journal = GetComponent<Journal>();
     }
 
     // Update is called once per frame
@@ -22,7 +24,7 @@ public class Examine : MonoBehaviour
     {
         // Check if the 'E' key was pressed this frame
         var keyboard = Keyboard.current;
-        if (keyboard == null || !keyboard.eKey.wasPressedThisFrame)
+        if (keyboard == null || !keyboard.eKey.wasPressedThisFrame || (journal != null && journal.IsOpen))
             return;
 
         if (hands != null && hands.Held != null)

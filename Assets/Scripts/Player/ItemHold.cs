@@ -10,6 +10,7 @@ public class ItemHold : MonoBehaviour
     public bool IsHolding => Held != null; // Whether the player is currently holding an item
 
     PlayerInteractor eyes;
+    Journal journal;
     Transform home;
     Vector3 homePosition;
     Quaternion homeRotation;
@@ -19,6 +20,7 @@ public class ItemHold : MonoBehaviour
     {
         // Get the PlayerInteractor component from the player
         eyes = GetComponent<PlayerInteractor>();
+        journal = GetComponent<Journal>();
     }
 
     // Update is called once per frame
@@ -26,7 +28,7 @@ public class ItemHold : MonoBehaviour
     {
         // Get the current mouse input
         var mouse = Mouse.current;
-        if (mouse == null)
+        if (mouse == null || (journal != null && journal.IsOpen))
             return;
         if (mouse.leftButton.wasPressedThisFrame)
         {
@@ -60,6 +62,8 @@ public class ItemHold : MonoBehaviour
         home = clue.transform.parent;
         homePosition = clue.transform.localPosition;
         homeRotation = clue.transform.localRotation;
+        foreach (var body in clue.GetComponentsInChildren<Rigidbody>())
+            KeepPropsStill.Freeze(body);
         shapes = clue.GetComponentsInChildren<Collider>();
         foreach (var shape in shapes)
             shape.enabled = false;
@@ -113,6 +117,8 @@ public class ItemHold : MonoBehaviour
         Held.transform.SetParent(home, false);
         Held.transform.localPosition = homePosition;
         Held.transform.localRotation = homeRotation;
+        foreach (var body in Held.GetComponentsInChildren<Rigidbody>())
+            KeepPropsStill.Freeze(body);
         foreach (var shape in shapes)
             shape.enabled = true;
         Held = null;

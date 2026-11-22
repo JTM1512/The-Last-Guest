@@ -11,6 +11,7 @@ public class ItemHold : MonoBehaviour
 
     PlayerInteractor eyes;
     Journal journal;
+    Accusation charge;
     Transform home;
     Vector3 homePosition;
     Quaternion homeRotation;
@@ -21,6 +22,7 @@ public class ItemHold : MonoBehaviour
         // Get the PlayerInteractor component from the player
         eyes = GetComponent<PlayerInteractor>();
         journal = GetComponent<Journal>();
+        charge = GetComponent<Accusation>();
     }
 
     // Update is called once per frame
@@ -28,7 +30,7 @@ public class ItemHold : MonoBehaviour
     {
         // Get the current mouse input
         var mouse = Mouse.current;
-        if (mouse == null || (journal != null && journal.IsOpen))
+        if (mouse == null || (journal != null && journal.IsOpen) || (charge != null && charge.IsOpen))
             return;
         if (mouse.leftButton.wasPressedThisFrame)
         {

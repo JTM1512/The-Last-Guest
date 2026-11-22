@@ -11,6 +11,7 @@ public class StudyWalker : MonoBehaviour
     float pitch;
     ItemHold hands;
     Journal journal;
+    Accusation charge;
 
     void Awake()
     {
@@ -19,6 +20,7 @@ public class StudyWalker : MonoBehaviour
         view = GetComponentInChildren<Camera>().transform;
         hands = GetComponent<ItemHold>();
         journal = GetComponent<Journal>();
+        charge = GetComponent<Accusation>();
     }
 
     void Update()
@@ -32,7 +34,7 @@ public class StudyWalker : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
-        if (journal != null && journal.IsOpen)
+        if ((journal != null && journal.IsOpen) || (charge != null && charge.IsOpen))
             return;
 
         if ((hands == null || !hands.IsHolding) && mouse.rightButton.isPressed)

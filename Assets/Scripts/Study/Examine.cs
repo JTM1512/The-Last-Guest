@@ -8,11 +8,13 @@ public class Examine : MonoBehaviour
     public Text readout;
     public List<Clue> found = new List<Clue>();
 
-    PlayerInteractor eyes; 
-   
+    PlayerInteractor eyes;
+    ItemHold hands;
+
     void Awake()
     {
         eyes = GetComponent<PlayerInteractor>();
+        hands = GetComponent<ItemHold>();
     }
 
     // Update is called once per frame
@@ -23,24 +25,20 @@ public class Examine : MonoBehaviour
         if (keyboard == null || !keyboard.eKey.wasPressedThisFrame)
             return;
 
+        if (hands != null && hands.Held != null)
+        {
+            var clue = hands.Held;
+            if (!found.Contains(clue))
+                found.Add(clue);
+            readout.text = clue.clueName + "\n" + clue.comment;
+            return;
+        }
+
         // Get the currently selected object from the PlayerInteractor
         var target = eyes.Current;
         if (target == null)
         {
             readout.text = "";
-            return;
-        }
-
-        // Check if the target has a Clue component in its parent hierarchy
-        var clue = target.GetComponentInParent<Clue>();
-        if (clue != null)
-        {
-            // If the clue is not already in the found list, add it
-            if (!found.Contains(clue))
-            {
-                found.Add(clue);
-            }
-           readout.text = clue.clueName + "\n" + clue.comment;
             return;
         }
 

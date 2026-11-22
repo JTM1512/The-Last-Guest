@@ -5358,8 +5358,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Blackwood Manor  \u2014  The Study\nWASD move     Mouse look     Esc unlocks
-    the cursor"
+  m_Text: "Blackwood Manor  \u2014  The Study\nWASD move     Hold right mouse to look     Left click a clue"
 --- !u!222 &496373139
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7785,6 +7784,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6429811503967129983, guid: de9788876f67ee041939157bb153b79b, type: 3}
   m_PrefabInstance: {fileID: 799109089}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &805597234
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 805597235}
+  m_Layer: 0
+  m_Name: Hold Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &805597235
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805597234}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.05, z: 0.55}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 908066815}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &811212992
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8205,6 +8235,7 @@ GameObject:
   - component: {fileID: 825756446}
   - component: {fileID: 825756449}
   - component: {fileID: 825756450}
+  - component: {fileID: 825756451}
   m_Layer: 0
   m_Name: Detective
   m_TagString: Untagged
@@ -8279,7 +8310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 218ef12690168d048bf3758d44d9cced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractor
-  reach: 3
+  reach: 4.5
   view: {fileID: 0}
 --- !u!114 &825756450
 MonoBehaviour:
@@ -8295,6 +8326,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Examine
   readout: {fileID: 1320104521}
   found: []
+--- !u!114 &825756451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 825756445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20db4c6173808e9488232194001cd755, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemHold
+  holdPoint: {fileID: 805597235}
+  turnSpeed: 0.4
 --- !u!1 &836692489
 GameObject:
   m_ObjectHideFlags: 0
@@ -8799,7 +8844,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 1.62, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 805597235}
   m_Father: {fileID: 825756448}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!81 &908066816

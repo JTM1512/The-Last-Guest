@@ -41,7 +41,7 @@ public class Accusation : MonoBehaviour
     void Update()
     {
         var keyboard = Keyboard.current;
-        if (keyboard == null || panel == null)
+        if (keyboard == null || panel == null || (GameScreens.Instance != null && GameScreens.Instance.BlocksPlay))
             return;
         if (!keyboard.enterKey.wasPressedThisFrame && !keyboard.numpadEnterKey.wasPressedThisFrame)
             return;
@@ -107,6 +107,9 @@ public class Accusation : MonoBehaviour
             verdict.text = "You named the right person, but the proof does not hold.";
         else
             verdict.text = "The killer walks free.";
+
+        if (Result != Verdict.None && GameScreens.Instance != null)
+            GameScreens.Instance.ShowResult(Result);
     }
     void MakeButton(Transform parent, string label, System.Action<Button> onPick)
     {

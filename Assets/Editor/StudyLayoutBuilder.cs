@@ -118,7 +118,7 @@ public static class StudyLayoutBuilder
 
         PlaceProp(Pack + "sofa_big.prefab", architecture, new Vector3(2.3f, 0f, 2.4f), Vector3.right, 1.3f, 2.6f);
         PlaceProp(Pack + "sofa_small.prefab", architecture, new Vector3(2.3f, 0f, 4.8f), Vector3.right, 1.3f, 2.2f);
-        PlaceProp(Pack + "tea_table 1.prefab", architecture, new Vector3(4.2f, 0f, 3.5f), Vector3.right, 0.8f, 1.4f);
+        var teaTable = PlaceProp(Pack + "tea_table 1.prefab", architecture, new Vector3(4.2f, 0f, 3.5f), Vector3.right, 0.8f, 1.4f);
         StripColliders(PlaceProp(Pack + "carpet_1.prefab", architecture, new Vector3(3.4f, 0f, 3.6f), Vector3.forward, 0.08f, 3.4f));
 
         var hearth = PlaceProp(StovePath, architecture, new Vector3(width - 1.6f, 0f, midZ + aisle + 2.3f), Vector3.left, 1.45f, 1.7f);
@@ -151,23 +151,21 @@ public static class StudyLayoutBuilder
         along.Normalize();
 
         var watch = CreatePocketWatch(clues);
-        SeatExisting(watch, deskTop - along * 0.28f, 20f, 0.12f);
+        SeatExisting(watch, deskTop + along * 0.05f, 20f, 0.12f);
         AddClue(watch, "Broken Pocket Watch", "The hands stopped at 8:30. Whatever happened in this room, it happened then.", font);
 
-        var report = SeatPrefab(ReportPath, clues, deskTop + along * 0.05f, 35f, 0.16f);
+        SeatPrefab(LampPath, clues, deskTop - along * 0.55f, 10f, 0.42f);
+
+        var report = SeatPrefab(ReportPath, clues, readingTop + new Vector3(0.05f, 0f, 0.12f), 40f, 0.16f);
         AddClue(report, "Torn Medical Report", "Victor tore into a report about his own health records. Someone had been changing them.", font);
 
-        var bottle = SeatPrefab(BottlePath, clues, deskTop + along * 0.34f, -15f, 0.22f);
+        var bottle = SeatPrefab(BottlePath, clues, TopOf(teaTable) + new Vector3(0.1f, 0f, -0.05f), -20f, 0.22f);
         AddClue(bottle, "Medication Bottle", "Victor's medicine. The seal is broken, and what remains does not match the dose on the label.", font);
-
-        SeatPrefab(LampPath, clues, deskTop - along * 0.62f, 10f, 0.42f);
-        SeatPrefab(GlobePath, clues, deskTop + along * 0.62f + Vector3.Cross(along, Vector3.up) * 0.15f, 40f, 0.38f);
 
         if (shelves.Count > 0)
         {
             var shelfBounds = BoundsOf(shelves[0]);
-            var notePoint = shelfBounds.center + Vector3.back * 0.35f;
-            notePoint.y = shelfBounds.center.y;
+            var notePoint = new Vector3(shelfBounds.center.x, shelfBounds.center.y + 0.15f, shelfBounds.min.z + 0.2f);
             var note = SeatPrefab(NotePath, clues, notePoint, 180f, 0.2f);
             AddClue(note, "Doctor's Appointment Note", "A note in Victor's hand. He meant to confront Dr. Reed here at 8:30.", font);
         }

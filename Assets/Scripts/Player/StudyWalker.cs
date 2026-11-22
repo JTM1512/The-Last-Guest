@@ -34,7 +34,7 @@ public class StudyWalker : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
-        if ((journal != null && journal.IsOpen) || (charge != null && charge.IsOpen))
+        if ((journal != null && journal.IsOpen) || (charge != null && charge.IsOpen) || (GameScreens.Instance != null && GameScreens.Instance.BlocksPlay))
             return;
 
         if ((hands == null || !hands.IsHolding) && mouse.rightButton.isPressed)

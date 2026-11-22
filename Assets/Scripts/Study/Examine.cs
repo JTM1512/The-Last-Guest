@@ -26,7 +26,7 @@ public class Examine : MonoBehaviour
     {
         // Check if the 'E' key was pressed this frame
         var keyboard = Keyboard.current;
-        if (keyboard == null || !keyboard.eKey.wasPressedThisFrame || (journal != null && journal.IsOpen) || (charge != null && charge.IsOpen))
+        if (keyboard == null || !keyboard.eKey.wasPressedThisFrame || (journal != null && journal.IsOpen) || (charge != null && charge.IsOpen) || (GameScreens.Instance != null && GameScreens.Instance.BlocksPlay))
             return;
 
         if (hands != null && hands.Held != null)

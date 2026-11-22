@@ -30,9 +30,12 @@ public class Journal : MonoBehaviour
     void Update()
     {
         var keyboard = Keyboard.current;
-        if (keyboard != null && keyboard.jKey.wasPressedThisFrame && panel != null)
-            panel.SetActive(!panel.activeSelf);
+        if (keyboard == null || panel == null || (GameScreens.Instance != null && GameScreens.Instance.BlocksPlay))
+            return;
+        if (!keyboard.jKey.wasPressedThisFrame)
+            return;
 
+        panel.SetActive(!panel.activeSelf);
         if (IsOpen)
             Show();
     }

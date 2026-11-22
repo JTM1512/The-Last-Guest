@@ -30,7 +30,7 @@ public class ItemHold : MonoBehaviour
     {
         // Get the current mouse input
         var mouse = Mouse.current;
-        if (mouse == null || (journal != null && journal.IsOpen) || (charge != null && charge.IsOpen))
+        if (mouse == null || (journal != null && journal.IsOpen) || (charge != null && charge.IsOpen) || (GameScreens.Instance != null && GameScreens.Instance.BlocksPlay))
             return;
         if (mouse.leftButton.wasPressedThisFrame)
         {

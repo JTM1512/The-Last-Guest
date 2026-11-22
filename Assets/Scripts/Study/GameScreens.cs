@@ -58,6 +58,8 @@ public class GameScreens : MonoBehaviour
         ShowOnly(mainMenu);
         if (hint != null)
             hint.SetActive(false);
+        if (GameAudio.Instance != null)
+            GameAudio.Instance.StopMusic();
     }
 
     public void PlayGame()
@@ -66,6 +68,11 @@ public class GameScreens : MonoBehaviour
         HideAll();
         if (hint != null)
             hint.SetActive(true);
+        var timer = FindAnyObjectByType<CaseTimer>();
+        if (timer != null)
+            timer.ResetClock();
+        if (GameAudio.Instance != null)
+            GameAudio.Instance.StartMusic();
     }
 
     public void Pause()
@@ -73,12 +80,16 @@ public class GameScreens : MonoBehaviour
         if (!Playing)
             return;
         pauseMenu.SetActive(true);
+        if (GameAudio.Instance != null)
+            GameAudio.Instance.PauseMusic(true);
     }
 
     public void Resume()
     {
         if (pauseMenu != null)
             pauseMenu.SetActive(false);
+        if (GameAudio.Instance != null)
+            GameAudio.Instance.PauseMusic(false);
     }
 
     public void Restart()
@@ -119,6 +130,8 @@ public class GameScreens : MonoBehaviour
             charge.panel.SetActive(false);
         if (hint != null)
             hint.SetActive(false);
+        if (GameAudio.Instance != null)
+            GameAudio.Instance.StopMusic();
         ShowOnly(screen);
     }
 

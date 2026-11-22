@@ -43,6 +43,8 @@ public class Examine : MonoBehaviour
             if (!found.Contains(clue))
                 found.Add(clue);
             readout.text = clue.clueName + "\n" + clue.comment;
+            if (GameAudio.Instance != null)
+                GameAudio.Instance.PlayClueAnalyse();
             return;
         }
 
@@ -59,6 +61,8 @@ public class Examine : MonoBehaviour
             if (!interviewed.Contains(suspect))
                 interviewed.Add(suspect);
             readout.text = suspect.suspectName + "\n" + suspect.claim;
+            if (GameAudio.Instance != null)
+                GameAudio.Instance.PlaySuspectTalk();
             return;
         }
 

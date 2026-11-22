@@ -73,6 +73,8 @@ public class ItemHold : MonoBehaviour
         clue.transform.localRotation = Quaternion.identity;
         clue.transform.localPosition = Vector3.zero;
         CenterOnHoldPoint(clue);
+        if (GameAudio.Instance != null)
+            GameAudio.Instance.PlayCluePickup();
     }
 
     void CenterOnHoldPoint(Clue clue)

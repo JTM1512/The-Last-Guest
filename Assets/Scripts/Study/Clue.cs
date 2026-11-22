@@ -6,4 +6,6 @@ public class Clue : MonoBehaviour
 
     [TextArea(2, 5)]
     public string description;
+    [TextArea(2, 5)]
+public string comment;
 }

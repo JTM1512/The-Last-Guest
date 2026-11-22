@@ -2696,6 +2696,7 @@ MonoBehaviour:
   clueName: Broken Pocket Watch
   description: The hands stopped at 8:30. Whatever happened in this room, it happened
     then.
+  comment: Half past eight. The watch stopped when he did.
 --- !u!1 &256760115
 GameObject:
   m_ObjectHideFlags: 0
@@ -5555,6 +5556,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Clue
   clueName: Doctor's Appointment Note
   description: A note in Victor's hand. He meant to confront Dr. Reed here at 8:30.
+  comment: He was going to face Dr. Reed here, at half past eight.
 --- !u!1001 &526441426
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9507,6 +9509,7 @@ MonoBehaviour:
   clueName: Torn Medical Report
   description: Victor tore into a report about his own health records. Someone had
     been changing them.
+  comment: Someone rewrote his records. He found out.
 --- !u!1001 &949157482
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15832,6 +15835,7 @@ MonoBehaviour:
   clueName: Medication Bottle
   description: Victor's medicine. The seal is broken, and what remains does not match
     the dose on the label.
+  comment: The seal is broken, and this is not the dose on the label.
 --- !u!1001 &1514139482
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19027,6 +19031,7 @@ MonoBehaviour:
   clueName: Muddy Footprints
   description: Wet prints come in from the conservatory door and stop inside the
     study.
+  comment: Someone came in from the conservatory and stopped in this room.
 --- !u!1001 &1962037856
 PrefabInstance:
   m_ObjectHideFlags: 0

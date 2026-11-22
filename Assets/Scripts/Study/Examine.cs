@@ -18,10 +18,12 @@ public class Examine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Check if the 'E' key was pressed this frame
         var keyboard = Keyboard.current;
         if (keyboard == null || !keyboard.eKey.wasPressedThisFrame)
             return;
 
+        // Get the currently selected object from the PlayerInteractor
         var target = eyes.Current;
         if (target == null)
         {
@@ -29,17 +31,20 @@ public class Examine : MonoBehaviour
             return;
         }
 
+        // Check if the target has a Clue component in its parent hierarchy
         var clue = target.GetComponentInParent<Clue>();
         if (clue != null)
         {
+            // If the clue is not already in the found list, add it
             if (!found.Contains(clue))
             {
                 found.Add(clue);
             }
-            readout.text = clue.clueName + "\n" + clue.description;
+           readout.text = clue.clueName + "\n" + clue.comment;
             return;
         }
 
+        // Check if the target has a Suspect component in its parent hierarchy
         var suspect = target.GetComponentInParent<Suspect>();
         if (suspect != null)
         {
